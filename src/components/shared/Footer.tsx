@@ -17,6 +17,7 @@ const COLUMNS = [
     title: 'Developers',
     links: [
       { text: 'Documentation', href: `${KIT}/docs` },
+      { text: 'Node docs', href: `${KIT}/node-docs` },
       { text: 'Pricing', href: `${KIT}/pricing` },
       { text: 'Security', href: `${KIT}/#security` },
     ],
@@ -33,24 +34,15 @@ const COLUMNS = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-line bg-card/50 px-4 pb-10 pt-16">
-      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[1.4fr_repeat(3,1fr)]">
-        <div>
-          <Link href="/" className="flex items-center gap-2">
-            <Image src={logo} alt="" width={30} height={30} className="h-7 w-7" />
-            <span className="font-viga text-2xl text-ink">Decane</span>
-          </Link>
-          <p className="mt-4 max-w-xs font-plusJakartaSans text-[14px] leading-relaxed text-muted">
-            A wallet for people, and wallets, gas and RPC for the apps they use.
-          </p>
-        </div>
+    <footer className="px-5 pb-10 pt-16">
+      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[repeat(3,minmax(0,180px))_1fr]">
         {COLUMNS.map((c) => (
           <div key={c.title}>
-            <p className="font-plusJakartaSans text-[13px] font-semibold text-ink">{c.title}</p>
-            <ul className="mt-4 space-y-3">
+            <p className="text-[13.5px] text-ink">{c.title}</p>
+            <ul className="mt-4 space-y-2.5">
               {c.links.map((l) => (
                 <li key={l.text}>
-                  <Link href={l.href} className="font-plusJakartaSans text-[14px] text-muted transition-colors hover:text-gold-ink">
+                  <Link href={l.href} className="text-[13.5px] text-muted transition-colors hover:text-ink">
                     {l.text}
                   </Link>
                 </li>
@@ -58,10 +50,14 @@ const Footer = () => {
             </ul>
           </div>
         ))}
-      </div>
-      <div className="mx-auto mt-14 flex max-w-6xl flex-col justify-between gap-3 border-t border-line pt-6 font-plusJakartaSans text-[13px] text-faint sm:flex-row">
-        <span>© Decane {new Date().getFullYear()}</span>
-        <span>Made for people, not just crypto natives.</span>
+        <div className="flex flex-col md:items-end md:text-right">
+          <Link href="/" className="flex items-center gap-2">
+            <Image src={logo} alt="" width={34} height={34} className="h-8 w-8" />
+            <span className="font-viga text-[34px] leading-none text-ink">Decane</span>
+          </Link>
+          <p className="mt-5 max-w-[16rem] text-[16px] leading-snug text-ink">No one holds a whole key. Not even us.</p>
+          <p className="mt-auto pt-10 text-[12.5px] text-faint">© Decane {new Date().getFullYear()}</p>
+        </div>
       </div>
     </footer>
   );

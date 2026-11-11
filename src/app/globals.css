@@ -3,52 +3,55 @@
 /* Theme tokens. Light is the default; dark follows the system until the
    visitor picks one with the toggle (html[data-theme]). */
 :root {
-  --bg: #f7f3ea;
-  --bg-2: #efe8d8;
+  --bg: #ffffff;
+  --bg-2: #f8f7f4;
   --card: #ffffff;
-  --card-2: #fbf8f1;
-  --ink: #17140d;
-  --muted: #5f594b;
-  --faint: #948d7c;
-  --line: rgba(23, 20, 13, 0.1);
+  --tint: #fbf6e9;
+  --tint-2: #f6edd2;
+  --ink: #0f0e0b;
+  --muted: #5e5a51;
+  --faint: #8d887c;
+  --line: rgba(15, 14, 11, 0.09);
   --gold: #ffbc05;
-  --gold-ink: #8f6400;
+  --gold-ink: #8a6200;
   --gold-soft: rgba(255, 188, 5, 0.16);
-  --shadow: 0 24px 60px -30px rgba(60, 45, 10, 0.35);
-  --dot: rgba(23, 20, 13, 0.09);
+  --shadow: 0 24px 60px -30px rgba(60, 45, 10, 0.3);
+  --dot: rgba(15, 14, 11, 0.07);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
-    --bg: #0b0a07;
-    --bg-2: #13110c;
-    --card: #15130e;
-    --card-2: #1b1913;
-    --ink: #f5f1e7;
-    --muted: rgba(245, 241, 231, 0.66);
-    --faint: rgba(245, 241, 231, 0.42);
-    --line: rgba(255, 255, 255, 0.1);
+    --bg: #0b0a08;
+    --bg-2: #100f0b;
+    --card: #15130f;
+    --tint: #16140e;
+    --tint-2: #221d10;
+    --ink: #f5f2ea;
+    --muted: rgba(245, 242, 234, 0.66);
+    --faint: rgba(245, 242, 234, 0.42);
+    --line: rgba(255, 255, 255, 0.09);
     --gold-ink: #ffbc05;
-    --gold-soft: rgba(255, 188, 5, 0.13);
+    --gold-soft: rgba(255, 188, 5, 0.12);
     --shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-    --dot: rgba(255, 255, 255, 0.07);
+    --dot: rgba(255, 255, 255, 0.06);
     color-scheme: dark;
   }
 }
 :root[data-theme='dark'] {
-  --bg: #0b0a07;
-  --bg-2: #13110c;
-  --card: #15130e;
-  --card-2: #1b1913;
-  --ink: #f5f1e7;
-  --muted: rgba(245, 241, 231, 0.66);
-  --faint: rgba(245, 241, 231, 0.42);
-  --line: rgba(255, 255, 255, 0.1);
+  --bg: #0b0a08;
+  --bg-2: #100f0b;
+  --card: #15130f;
+  --tint: #16140e;
+  --tint-2: #221d10;
+  --ink: #f5f2ea;
+  --muted: rgba(245, 242, 234, 0.66);
+  --faint: rgba(245, 242, 234, 0.42);
+  --line: rgba(255, 255, 255, 0.09);
   --gold-ink: #ffbc05;
-  --gold-soft: rgba(255, 188, 5, 0.13);
+  --gold-soft: rgba(255, 188, 5, 0.12);
   --shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
-  --dot: rgba(255, 255, 255, 0.07);
+  --dot: rgba(255, 255, 255, 0.06);
   color-scheme: dark;
 }
 
@@ -56,7 +59,8 @@
   --color-bg: var(--bg);
   --color-bg-2: var(--bg-2);
   --color-card: var(--card);
-  --color-card-2: var(--card-2);
+  --color-tint: var(--tint);
+  --color-tint-2: var(--tint-2);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-faint: var(--faint);
@@ -66,7 +70,9 @@
   --color-gold-soft: var(--gold-soft);
   --color-decane-yellow: #ffd700;
 
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
   --font-viga: var(--font-viga);
+  --font-tajawal: var(--font-tajawal);
   --font-plusJakartaSans: var(--font-plus-jakarta-sans);
 }
 
@@ -80,9 +86,44 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Two-tone headings: the second line steps back. */
+.h-display {
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+}
+.h-display .soft {
+  color: var(--faint);
+}
+
 .dots {
   background-image: radial-gradient(var(--dot) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-size: 18px 18px;
+}
+
+/* The fine dotted band between sections. */
+.seam {
+  height: 56px;
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 6px 6px;
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 40%, #000 60%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 40%, #000 60%, transparent);
+}
+
+/* Warm product panels: gold to amber light in light mode, embers in dark. */
+.panel-warm {
+  background: radial-gradient(120% 90% at 85% 10%, #ffd66b 0%, #ffe9a8 30%, #fbf3dc 62%, #fbf6e9 100%);
+}
+.panel-soft {
+  background: linear-gradient(160deg, var(--tint) 0%, var(--tint-2) 100%);
+}
+:root[data-theme='dark'] .panel-warm {
+  background: radial-gradient(120% 90% at 85% 10%, #6b4a00 0%, #3a2a06 35%, #1c170c 65%, #16140e 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .panel-warm {
+    background: radial-gradient(120% 90% at 85% 10%, #6b4a00 0%, #3a2a06 35%, #1c170c 65%, #16140e 100%);
+  }
 }
 
 .shadow-soft {
