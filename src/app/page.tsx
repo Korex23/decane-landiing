@@ -7,6 +7,7 @@ import ProductRail from '@/components/home/ProductRail';
 import Pillars from '@/components/home/Pillars';
 import HeroScene from '@/components/home/HeroScene';
 import CodeTabs from '@/components/home/CodeTabs';
+import MascotBuddy from '@/components/home/MascotBuddy';
 import { PRODUCTS } from '@/components/home/products';
 import { KIT, STORE } from '@/components/home/links';
 import Peg from '@/images/decane-peg.png';
@@ -25,6 +26,7 @@ export default function Home() {
   return (
     <div className="overflow-x-clip">
       <Header />
+      <MascotBuddy />
 
       {/* Hero */}
       <header className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 pt-28 md:pt-32 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
