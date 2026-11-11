@@ -1,19 +1,10 @@
 import Image from 'next/image';
 import WalletUI from '@/images/wallet-ui.png';
 import KitModal from './KitModal';
-import { Chip } from './Visuals';
 
 // The hero picture: the Connect Kit sign-in opening over an app in a browser,
-// as it does in a real integration, with the Decane Wallet in front and the
-// gas and RPC products signalling around it. One scene, all four products.
+// as it does in a real integration, with the Decane Wallet in front.
 
-const Ok = () => (
-  <span className="grid h-4 w-4 flex-none place-items-center rounded-full bg-emerald-500 text-white">
-    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M5 12l5 5 9-10" />
-    </svg>
-  </span>
-);
 
 const Bar = ({ w, className = '' }: { w: string; className?: string }) => <span className={`block h-2.5 rounded-full bg-ink/10 ${className}`} style={{ width: w }} />;
 
@@ -66,14 +57,6 @@ export default function HeroScene() {
         priority
         className="absolute bottom-[-6%] left-[-16%] w-[62%] max-w-[420px] drop-shadow-2xl sm:left-[-12%] sm:w-[52%]"
       />
-
-      {/* Gas and RPC, at work */}
-      <Chip className="absolute right-[5%] top-[4%] animate-[float_6s_ease-in-out_infinite]">
-        <Ok /> Gas paid by Northgate
-      </Chip>
-      <Chip className="absolute bottom-[6%] right-[5%] animate-[float_7s_ease-in-out_infinite_-2s]">
-        <span className="h-2 w-2 rounded-full bg-emerald-500" /> RPC · Base · 18 req/s
-      </Chip>
     </div>
   );
 }

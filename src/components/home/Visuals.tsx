@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import WalletUI from '@/images/wallet-ui.png';
-import Peg from '@/images/decane-peg.png';
 import { KitWallet } from './KitModal';
 
 // One product surface per product, all in the same frame so the four read as
@@ -17,31 +16,12 @@ const Win = ({ title, right, children }: { title: React.ReactNode; right?: React
   </div>
 );
 
-const Ok = () => (
-  <span className="grid h-4 w-4 flex-none place-items-center rounded-full bg-emerald-500 text-white">
-    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M5 12l5 5 9-10" />
-    </svg>
-  </span>
-);
 
-export const Chip = ({ children, className = '' }: { children: React.ReactNode; className?: string }) => (
-  <div className={`flex items-center gap-2 whitespace-nowrap rounded-full border border-line bg-card px-3.5 py-2 font-plusJakartaSans text-[12.5px] font-medium text-ink shadow-soft ${className}`}>
-    {children}
-  </div>
-);
 
 export function WalletVisual() {
   return (
     <div className="relative mx-auto flex w-full max-w-[420px] items-center justify-center">
       <Image src={WalletUI} alt="The Decane Wallet home screen" className="w-full scale-[1.3]" />
-      <Image src={Peg} alt="" aria-hidden="true" className="absolute -bottom-4 left-0 w-20 drop-shadow-xl md:w-24" />
-      <Chip className="absolute right-0 top-[12%] animate-[float_6s_ease-in-out_infinite]">
-        <Ok /> Swapped 0.5 SOL → USDC
-      </Chip>
-      <Chip className="absolute bottom-[10%] right-[2%] animate-[float_7s_ease-in-out_infinite_-2s]">
-        <span className="h-2 w-2 rounded-full bg-gold" /> Connected via WalletConnect
-      </Chip>
     </div>
   );
 }
@@ -77,9 +57,6 @@ export function GasVisual() {
         </div>
         <div className="rounded-xl bg-gold py-2.5 text-center font-semibold text-black">Confirm</div>
       </Win>
-      <Chip className="-mt-4 animate-[float_6s_ease-in-out_infinite]">
-        <Ok /> Sent · no ETH needed
-      </Chip>
     </div>
   );
 }
