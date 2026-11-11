@@ -9,11 +9,13 @@ import { PRODUCTS } from '@/components/home/products';
 import { Glyph } from '@/components/home/bits';
 import ThemeToggle from '@/components/home/ThemeToggle';
 
+// The same items as kit.decane.app's nav, so the two sites read as one.
 const LINKS = [
-  { name: 'Developers', href: '#developers' },
+  { name: 'Docs', href: `${KIT}/docs` },
   { name: 'Pricing', href: `${KIT}/pricing` },
   { name: 'Community', href: DISCORD },
 ];
+const DASHBOARD = 'https://dashboard.decane.app';
 
 const Caret = ({ open }: { open: boolean }) => (
   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={`transition-transform ${open ? 'rotate-180' : ''}`}>
@@ -98,10 +100,10 @@ const Header = () => {
 
         <div className="flex items-center gap-1.5">
           <ThemeToggle />
-          <Link href={`${KIT}/docs`} className="hidden rounded-full px-3.5 py-2 text-[14px] text-ink transition-colors hover:bg-ink/5 sm:inline-flex">
-            Docs
+          <Link href={DASHBOARD} className="hidden rounded-full px-3.5 py-2 text-[14px] text-ink transition-colors hover:bg-ink/5 sm:inline-flex">
+            Sign in
           </Link>
-          <Link href="#products" className="hidden rounded-full border border-ink px-4 py-1.5 text-[14px] text-ink transition-colors hover:bg-ink hover:text-bg sm:inline-flex">
+          <Link href={`${DASHBOARD}/auth/register`} className="hidden rounded-full border border-ink px-4 py-1.5 text-[14px] text-ink transition-colors hover:bg-ink hover:text-bg sm:inline-flex">
             Get started
           </Link>
           <button
@@ -131,7 +133,7 @@ const Header = () => {
             </li>
           ))}
           <li className="my-2 border-t border-line" />
-          {[...LINKS, { name: 'Docs', href: `${KIT}/docs` }].map((l) => (
+          {[...LINKS, { name: 'Sign in', href: DASHBOARD }, { name: 'Get started', href: `${DASHBOARD}/auth/register` }].map((l) => (
             <li key={l.name}>
               <Link href={l.href} onClick={() => setOpen(false)} className="block rounded-xl px-3 py-3 text-[16px] text-ink hover:bg-tint">
                 {l.name}

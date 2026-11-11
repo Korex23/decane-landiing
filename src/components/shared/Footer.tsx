@@ -3,6 +3,7 @@ import Link from 'next/link';
 import logo from '@/svgs/logo.svg';
 import { STORE, DISCORD, KIT } from '@/components/home/links';
 
+// The same columns as kit.decane.app's footer, so the two sites read as one.
 const COLUMNS = [
   {
     title: 'Products',
@@ -16,25 +17,27 @@ const COLUMNS = [
   {
     title: 'Developers',
     links: [
-      { text: 'Documentation', href: `${KIT}/docs` },
-      { text: 'Node docs', href: `${KIT}/node-docs` },
-      { text: 'Pricing', href: `${KIT}/pricing` },
-      { text: 'Security', href: `${KIT}/#security` },
+      { text: 'Docs', href: `${KIT}/docs` },
+      { text: 'Server SDKs', href: `${KIT}/node-docs` },
+      { text: 'Changelog', href: `${KIT}/changelog` },
+      { text: 'llms.txt', href: `${KIT}/llms.txt` },
     ],
   },
   {
     title: 'Company',
     links: [
+      { text: 'Pricing', href: `${KIT}/pricing` },
       { text: 'Community', href: DISCORD },
-      { text: 'Contact', href: 'mailto:info@decane.app' },
-      { text: 'Terms & Privacy', href: '/privacy' },
+      { text: 'Recovering a wallet', href: `${KIT}/recovery` },
+      { text: 'Terms', href: `${KIT}/terms` },
+      { text: 'Privacy', href: '/privacy' },
     ],
   },
 ];
 
 const Footer = () => {
   return (
-    <footer className="px-5 pb-10 pt-16">
+    <footer className="border-t border-line px-5 pb-10 pt-16">
       <div className="mx-auto grid max-w-[1320px] gap-12 md:grid-cols-[repeat(3,minmax(0,180px))_1fr]">
         {COLUMNS.map((c) => (
           <div key={c.title}>
