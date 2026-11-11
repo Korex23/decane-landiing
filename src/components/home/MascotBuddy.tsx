@@ -3,11 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { animate, motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
 
-// The Decane mascot hops down the right edge from section to section. Each
-// section has a perch; when you scroll into a new one it crouches, leaps in an
-// arc (stretching, tilting, mouth open), lands with a squash and a bounce, and
-// settles. Perched, it breathes, blinks and watches the cursor. A click goes
-// back to the top. With reduced motion it sits still in the corner.
+// The Decane mascot zig-zags down the page: it perches on the right edge for
+// one section and the left edge for the next. Scroll into a new section and it
+// crouches, leaps across the page in an arc with a somersault (mouth open),
+// lands with a squash and a bounce, and settles. Perched, it breathes, blinks
+// and watches the cursor. A click goes back to the top. On narrow screens,
+// where the margins are too thin to perch in, and with reduced motion, it sits
+// still in the corner.
 
 const MAX_LOOK = 2.2; // how far the pupils travel, in SVG units
 const SIZE = 56;
@@ -18,16 +20,29 @@ function findSections(): HTMLElement[] {
   return all.filter((el) => !all.some((other) => other !== el && other.contains(el)));
 }
 
-/** The perch for section i of n: spread down the right edge of the screen. */
-function perchY(i: number, n: number) {
+/** The perch for section i of n: alternating sides, stepping down the screen. */
+function perch(i: number, n: number) {
+  const w = window.innerWidth;
   const h = window.innerHeight;
-  const top = h * 0.16;
-  const bottom = h * 0.84 - SIZE;
-  return n <= 1 ? top : top + ((bottom - top) * i) / (n - 1);
+  const top = h * 0.2;
+  const bottom = h * 0.78 - SIZE;
+  const y = n <= 1 ? top : top + ((bottom - top) * i) / (n - 1);
+  const x = i % 2 === 0 ? w - SIZE - 20 : 20;
+  return { x, y };
 }
 
 export default function MascotBuddy() {
-  const reduce = useReducedMotion();
+  const reduceMotion = useReducedMotion();
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1099px)');
+    const on = () => setNarrow(mq.matches);
+    on();
+    mq.addEventListener('change', on);
+    return () => mq.removeEventListener('change', on);
+  }, []);
+  const still = !!reduceMotion || narrow;
+  const reduce = reduceMotion;
   const ref = useRef<HTMLButtonElement>(null);
   const [blink, setBlink] = useState(false);
   const [air, setAir] = useState(false);
@@ -50,57 +65,59 @@ export default function MascotBuddy() {
 
   const jumpTo = useCallback(
     async (index: number, n: number) => {
-      const from = y.get();
-      const to = perchY(index, n);
+      const fromX = x.get();
+      const fromY = y.get();
+      const { x: toX, y: toY } = perch(index, n);
       const run = ++hop.current.run;
       const alive = () => hop.current.run === run;
-      const dir = to > from ? 1 : -1;
-      const dist = Math.abs(to - from);
-      const apex = Math.min(from, to) - Math.min(90, 40 + dist * 0.25);
-      const t = Math.min(0.5, 0.26 + dist / 2400);
+      const across = Math.abs(toX - fromX);
+      const dir = toX >= fromX ? 1 : -1;
+      // The top of the arc stays below the nav bar.
+      const apex = Math.max(76, Math.min(fromY, toY) - Math.min(160, 70 + across * 0.08));
+      const flight = Math.min(0.95, 0.42 + across / 2600);
 
       // crouch
       await Promise.all([
-        animate(sy, 0.78, { duration: 0.09, ease: 'easeOut' }),
-        animate(sx, 1.18, { duration: 0.09, ease: 'easeOut' }),
+        animate(sy, 0.76, { duration: 0.1, ease: 'easeOut' }),
+        animate(sx, 1.2, { duration: 0.1, ease: 'easeOut' }),
       ]);
       if (!alive()) return;
       setAir(true);
-      // take off, up to the top of the arc
-      await Promise.all([
-        animate(y, apex, { duration: t, ease: [0.2, 0.7, 0.3, 1] }),
-        animate(x, -22, { duration: t, ease: 'easeOut' }),
-        animate(sy, 1.16, { duration: t * 0.4 }),
-        animate(sx, 0.88, { duration: t * 0.4 }),
-        animate(rot, dir * -12, { duration: t }),
-      ]);
+      // across the page in one arc: x steadily, y up then down, a somersault on the way
+      animate(sy, 1.14, { duration: flight * 0.25 });
+      animate(sx, 0.9, { duration: flight * 0.25 });
+      const flip = across > 200 ? dir * 360 : dir * 14;
+      const goX = animate(x, toX, { duration: flight, ease: [0.45, 0.05, 0.55, 0.95] });
+      const spin = animate(rot, flip, { duration: flight, ease: [0.4, 0, 0.6, 1] });
+      await animate(y, apex, { duration: flight / 2, ease: [0.2, 0.7, 0.4, 1] });
       if (!alive()) return;
-      // and down onto the new perch
-      animate(sy, 1.06, { duration: t * 0.6 });
-      animate(sx, 0.95, { duration: t * 0.6 });
-      await Promise.all([
-        animate(y, to, { duration: t, ease: [0.55, 0, 0.9, 0.45] }),
-        animate(x, 0, { duration: t, ease: 'easeIn' }),
-        animate(rot, dir * 6, { duration: t }),
-      ]);
+      animate(sy, 1.05, { duration: flight * 0.3 });
+      animate(sx, 0.96, { duration: flight * 0.3 });
+      await animate(y, toY, { duration: flight / 2, ease: [0.6, 0, 0.8, 0.4] });
+      await Promise.all([goX, spin]);
       if (!alive()) return;
+      rot.set(0);
       setAir(false);
       // land: squash, then wobble back to shape
       await Promise.all([
-        animate(sy, 0.72, { duration: 0.07, ease: 'easeOut' }),
-        animate(sx, 1.24, { duration: 0.07, ease: 'easeOut' }),
+        animate(sy, 0.7, { duration: 0.07, ease: 'easeOut' }),
+        animate(sx, 1.26, { duration: 0.07, ease: 'easeOut' }),
       ]);
       if (!alive()) return;
       animate(sy, 1, { type: 'spring', stiffness: 520, damping: 9 });
       animate(sx, 1, { type: 'spring', stiffness: 520, damping: 9 });
-      animate(rot, 0, { type: 'spring', stiffness: 300, damping: 10 });
     },
     [x, y, sx, sy, rot],
   );
 
   // Watch which section you are in; hop when it changes.
   useEffect(() => {
-    if (reduce) return;
+    if (still) {
+      const on = () => setShown(window.scrollY > 240);
+      on();
+      window.addEventListener('scroll', on, { passive: true });
+      return () => window.removeEventListener('scroll', on);
+    }
     let sections = findSections();
     let frame = 0;
     const check = () => {
@@ -114,7 +131,9 @@ export default function MascotBuddy() {
       const n = sections.length;
       if (hop.current.index === -1) {
         hop.current = { ...hop.current, index: i, n };
-        y.set(perchY(i, n));
+        const p = perch(i, n);
+        x.set(p.x);
+        y.set(p.y);
       } else if (i !== hop.current.index || n !== hop.current.n) {
         hop.current.index = i;
         hop.current.n = n;
@@ -126,7 +145,9 @@ export default function MascotBuddy() {
     };
     const onResize = () => {
       sections = findSections();
-      y.set(perchY(hop.current.index < 0 ? 0 : hop.current.index, sections.length));
+      const p = perch(hop.current.index < 0 ? 0 : hop.current.index, sections.length);
+      x.set(p.x);
+      y.set(p.y);
       onScroll();
     };
     // Sections can mount late (client pieces), so look again shortly.
@@ -140,7 +161,7 @@ export default function MascotBuddy() {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
     };
-  }, [reduce, jumpTo, y]);
+  }, [still, jumpTo, x, y]);
 
   useEffect(() => {
     if (reduce) return;
@@ -202,7 +223,7 @@ export default function MascotBuddy() {
     </svg>
   );
 
-  if (reduce) {
+  if (still) {
     return (
       <button
         type="button"
@@ -222,7 +243,7 @@ export default function MascotBuddy() {
       type="button"
       onClick={toTop}
       aria-label="Back to top"
-      className="group fixed right-3 top-0 z-40 h-12 w-12 cursor-pointer sm:right-5 sm:h-14 sm:w-14"
+      className="group fixed left-0 top-0 z-40 h-14 w-14 cursor-pointer"
       style={{ y, x, pointerEvents: shown ? 'auto' : 'none' }}
       initial={false}
       animate={{ opacity: shown ? 1 : 0 }}
@@ -237,7 +258,7 @@ export default function MascotBuddy() {
       />
       <motion.span
         className="block h-full w-full"
-        style={{ scaleX: sx, scaleY: sy, rotate: rot, transformOrigin: '50% 100%' }}
+        style={{ scaleX: sx, scaleY: sy, rotate: rot, transformOrigin: '50% 62%' }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
