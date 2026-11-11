@@ -51,9 +51,9 @@ const Footer = () => {
           </div>
         ))}
         <div className="flex flex-col md:items-end md:text-right">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src={logo} alt="" width={36} height={34} className="h-[34px] w-[36px]" />
-            <span className="text-[30px] font-bold leading-none tracking-[-0.03em] text-ink">Decane</span>
+          <Link href="/" className="flex items-center gap-2">
+            <Image src={logo} alt="" width={34} height={34} className="h-8 w-8" />
+            <span className="font-viga text-[34px] leading-none text-ink">Decane</span>
           </Link>
           <p className="mt-5 max-w-[16rem] text-[16px] leading-snug text-ink">No one holds a whole key. Not even us.</p>
           <p className="mt-auto pt-10 text-[12.5px] text-faint">© Decane {new Date().getFullYear()}</p>
