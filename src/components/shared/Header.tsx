@@ -50,9 +50,9 @@ const Header = () => {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${scrolled || open ? 'border-line bg-bg/85 backdrop-blur-xl' : 'border-transparent bg-transparent'}`}>
       <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5">
-        <Link href="/" className="flex items-center gap-2">
-          <Image src={logo} alt="" width={26} height={26} className="h-6 w-6" />
-          <span className="font-viga text-[22px] text-ink">Decane</span>
+        <Link href="/" className="flex items-center gap-2.5">
+          <Image src={logo} alt="" width={26} height={26} className="h-[24px] w-[26px]" />
+          <span className="text-[16px] font-bold tracking-[-0.02em] text-ink">Decane</span>
         </Link>
 
         <nav className="absolute left-1/2 hidden -translate-x-1/2 lg:block" aria-label="Main">
