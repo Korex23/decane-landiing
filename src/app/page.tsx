@@ -111,7 +111,7 @@ export default function Home() {
         <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-5 py-14 md:grid-cols-4">
           {NUMBERS.map((n) => (
             <Reveal key={n.v} className="text-center">
-              <dt className="text-[44px] font-normal tracking-[-0.04em] text-ink md:text-[52px]">{n.k}</dt>
+              <dt className="text-[44px] font-medium tracking-[-0.04em] text-ink md:text-[52px]">{n.k}</dt>
               <dd className="mt-1 text-[13.5px] text-muted">{n.v}</dd>
             </Reveal>
           ))}

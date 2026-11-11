@@ -17,7 +17,7 @@ export default function Bento() {
                 <span>{p.audience}</span>
                 {p.soon && <span className="ml-auto rounded-full bg-gold-soft px-2.5 py-0.5 text-[11.5px] text-gold-ink">Coming soon</span>}
               </div>
-              <h3 className="mt-4 text-[24px] font-normal leading-tight tracking-[-0.02em] text-ink md:text-[26px]">{p.title}</h3>
+              <h3 className="mt-4 text-[24px] font-medium leading-tight tracking-[-0.02em] text-ink md:text-[26px]">{p.title}</h3>
               <p className="mt-2 max-w-md text-[15px] leading-relaxed text-muted">{p.line}</p>
             </div>
             <div className="relative flex h-[400px] items-center justify-center overflow-hidden px-5">

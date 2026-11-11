@@ -1,11 +1,10 @@
 import type { Metadata } from 'next';
-import { Geist, Viga, Tajawal, Plus_Jakarta_Sans } from 'next/font/google';
+import { Viga, Tajawal, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import OverallLayout from '@/layout';
 
-// Geist sets the page; Plus Jakarta Sans is the Connect Kit modal's own face
-// (so its picture matches the SDK); Viga is the wordmark; Tajawal the legal page.
-const geist = Geist({ variable: '--font-geist', subsets: ['latin'] });
+// Plus Jakarta Sans is Decane's face: the page, kit.decane.app and the Connect
+// Kit modal all use it. Viga is the wordmark; Tajawal the legal page.
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: '--font-plus-jakarta-sans',
   subsets: ['latin'],
@@ -29,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
       </head>
-      <body className={`${geist.variable} ${plusJakartaSans.variable} ${viga.variable} ${tajawal.variable} font-sans min-h-screen antialiased`}>
+      <body className={`${plusJakartaSans.variable} ${viga.variable} ${tajawal.variable} font-sans min-h-screen antialiased`}>
         <OverallLayout>{children}</OverallLayout>
       </body>
     </html>

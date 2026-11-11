@@ -70,7 +70,7 @@
   --color-gold-soft: var(--gold-soft);
   --color-decane-yellow: #ffd700;
 
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plus-jakarta-sans), ui-sans-serif, system-ui, sans-serif;
   --font-viga: var(--font-viga);
   --font-tajawal: var(--font-tajawal);
   --font-plusJakartaSans: var(--font-plus-jakarta-sans);
@@ -88,8 +88,8 @@ body {
 
 /* Two-tone headings: the second line steps back. */
 .h-display {
-  font-weight: 400;
-  letter-spacing: -0.035em;
+  font-weight: 500;
+  letter-spacing: -0.032em;
   line-height: 1.04;
 }
 .h-display .soft {
