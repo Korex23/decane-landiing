@@ -5,84 +5,83 @@ import Footer from '@/components/shared/Footer';
 import Reveal from '@/components/home/Reveal';
 import Bento from '@/components/home/Bento';
 import Pillars from '@/components/home/Pillars';
-import KitModal from '@/components/home/KitModal';
-import { Chip } from '@/components/home/Visuals';
+import HeroScene from '@/components/home/HeroScene';
+import CodeTabs from '@/components/home/CodeTabs';
+import { PRODUCTS } from '@/components/home/products';
+import { Glyph } from '@/components/home/bits';
 import { KIT, STORE } from '@/components/home/links';
-import WalletUI from '@/images/wallet-ui.png';
+import Peg from '@/images/decane-peg.png';
 
 const STACKS = ['React', 'React Native', 'iOS', 'Android', 'Node.js', 'Python', 'Rust'];
 
-const NUMBERS = [
-  { k: '4', v: 'products on one account' },
-  { k: '7', v: 'SDKs, web to server' },
-  { k: '3', v: 'chain families: EVM, Solana, Tron' },
-  { k: '2 of 3', v: 'key shares needed to sign' },
-];
+const TRUST = ['Non-custodial', '2-of-3 key shares', 'Attested enclave', 'EVM, Solana, Tron'];
 
-const Ok = () => (
-  <span className="grid h-4 w-4 flex-none place-items-center rounded-full bg-emerald-500 text-white">
-    <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M5 12l5 5 9-10" />
-    </svg>
-  </span>
-);
+const STEPS = [
+  { title: 'Create a project', body: 'Sign up, create a project and copy its key. Free up to 499 monthly active wallets.' },
+  { title: 'Drop in the SDK', body: 'One provider on the web, one client on mobile, one line to verify tokens on your server.' },
+  { title: 'Go live', body: 'Your users sign in the way they already do and leave with a wallet. Add gas and RPC to the same project as they ship.' },
+];
 
 export default function Home() {
   return (
     <div className="overflow-x-clip">
       <Header />
 
-      {/* Hero: copy left, the products on a warm panel right */}
-      <header className="mx-auto grid max-w-6xl items-center gap-12 px-5 pt-28 md:pt-32 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
+      {/* Hero */}
+      <header className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 pt-28 md:pt-32 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
         <Reveal className="min-w-0">
-          <h1 className="h-display text-[44px] sm:text-[56px] lg:text-[62px]">
-            Put crypto in everyone&apos;s hands
-            <br />
-            <span className="soft">with wallets, gas and RPC</span>
+          <Link
+            href="#gas"
+            className="group inline-flex items-center gap-2 rounded-full border border-line bg-card py-1 pl-1 pr-3 text-[13px] text-muted transition-colors hover:border-ink/30"
+          >
+            <span className="rounded-full bg-gold px-2 py-0.5 text-[11.5px] font-semibold text-black">New</span>
+            Gas sponsorship and RPC are coming
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
+          <h1 className="h-display mt-6 text-[44px] sm:text-[56px] lg:text-[52px] xl:text-[60px]">
+            <span className="block text-balance lg:whitespace-nowrap">Wallets for everyone.</span>
+            <span className="soft block text-balance lg:whitespace-nowrap">Rails for every app.</span>
           </h1>
-          <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted">
-            A self-custody wallet for people, and the same rails for apps: wallets behind a sign-in, gas nobody has to hold,
-            and node access from one URL.
+          <p className="mt-6 max-w-[30rem] text-[17px] leading-relaxed text-muted md:text-[18px]">
+            Decane is a self-custody wallet for people, and the infrastructure under it for builders: wallets behind any
+            sign-in, gas nobody has to hold, and node access from one URL.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="#products" className="rounded-full bg-ink px-5 py-2.5 text-[14.5px] text-bg transition-opacity hover:opacity-85">
-              Get started
+            <Link href={KIT} target="_blank" rel="noopener" className="rounded-full bg-ink px-6 py-3 text-[15px] font-medium text-bg transition-opacity hover:opacity-85">
+              Start building
             </Link>
             <Link
-              href={`${KIT}/docs`}
+              href={STORE}
               target="_blank"
               rel="noopener"
-              className="rounded-full border border-ink/80 px-5 py-2.5 text-[14.5px] text-ink transition-colors hover:bg-ink hover:text-bg"
+              className="rounded-full border border-ink/80 px-6 py-3 text-[15px] font-medium text-ink transition-colors hover:bg-ink hover:text-bg"
             >
-              Read the docs
+              Get the wallet
             </Link>
           </div>
+          <ul className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-muted">
+            {TRUST.map((t) => (
+              <li key={t} className="flex items-center gap-2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" className="text-gold-ink" aria-hidden="true">
+                  <path d="M5 12l5 5 9-10" />
+                </svg>
+                {t}
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         <Reveal delay={0.12} className="min-w-0">
-          <div className="panel-warm relative h-[460px] overflow-hidden rounded-2xl sm:h-[540px]">
-            <Image
-              src={WalletUI}
-              alt="The Decane Wallet home screen"
-              priority
-              className="absolute bottom-[2%] left-[-8%] w-[78%] max-w-[520px] sm:left-[-5%] sm:w-[68%]"
-            />
-            <div className="absolute right-[-14%] top-[54%] -translate-y-1/2 sm:right-[-3%]">
-              <KitModal id="hero" />
-            </div>
-            <Chip className="absolute left-[6%] top-[7%] animate-[float_6s_ease-in-out_infinite]">
-              <Ok /> Sent 25 USDC · gas paid by Northgate
-            </Chip>
-          </div>
+          <HeroScene />
         </Reveal>
       </header>
 
       {/* SDK strip */}
-      <section className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+      <section className="mx-auto max-w-[1320px] px-5 py-16 md:py-20">
         <p className="text-center text-[13px] text-faint">SDKs for the stack you already use</p>
         <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 md:gap-x-14">
           {STACKS.map((s) => (
-            <li key={s} className="text-[19px] font-medium tracking-[-0.02em] text-faint md:text-[21px]">
+            <li key={s} className="text-[19px] font-semibold tracking-[-0.02em] text-faint md:text-[21px]">
               {s}
             </li>
           ))}
@@ -92,66 +91,99 @@ export default function Home() {
       <div className="seam" aria-hidden="true" />
 
       {/* Products */}
-      <section className="mx-auto max-w-6xl px-5 pb-24 pt-16 md:pt-20">
-        <Reveal>
-          <h2 className="h-display max-w-3xl text-[34px] md:text-[44px]">
-            Four products for onchain apps
+      <section className="mx-auto max-w-[1320px] px-5 pb-24 pt-16 md:pb-32 md:pt-20">
+        <Reveal className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
+          <h2 className="h-display max-w-3xl text-[34px] md:text-[46px]">
+            Four products, one account
             <br />
-            <span className="soft">and the people who use them</span>
+            <span className="soft">for apps and their users</span>
           </h2>
+          <ul className="flex flex-wrap gap-2">
+            {PRODUCTS.map((p) => (
+              <li key={p.id}>
+                <Link href={`#${p.id}`} className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-[13px] text-muted transition-colors hover:border-ink/30 hover:text-ink">
+                  <span className="text-gold-ink">
+                    <Glyph d={p.icon} size={14} />
+                  </span>
+                  {p.short}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Reveal>
         <div className="mt-12">
           <Bento />
         </div>
       </section>
 
-      {/* Numbers */}
-      <section className="bg-bg-2">
-        <div className="seam" aria-hidden="true" />
-        <dl className="mx-auto grid max-w-6xl grid-cols-2 gap-y-10 px-5 py-14 md:grid-cols-4">
-          {NUMBERS.map((n) => (
-            <Reveal key={n.v} className="text-center">
-              <dt className="text-[44px] font-medium tracking-[-0.04em] text-ink md:text-[52px]">{n.k}</dt>
-              <dd className="mt-1 text-[13.5px] text-muted">{n.v}</dd>
-            </Reveal>
-          ))}
-        </dl>
-        <div className="seam" aria-hidden="true" />
+      {/* Code */}
+      <section className="relative overflow-hidden bg-[#0d0c09] text-[#f5f2ea]">
+        <div className="pointer-events-none absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-[#ffbc05]/10 blur-[120px]" aria-hidden="true" />
+        <div className="relative mx-auto grid max-w-[1320px] gap-12 px-5 py-24 md:py-32 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <Reveal>
+            <h2 className="h-display text-[34px] md:text-[46px]">
+              Live this afternoon
+              <br />
+              <span className="text-white/45">not next quarter</span>
+            </h2>
+            <ol className="mt-10 space-y-7">
+              {STEPS.map((s, i) => (
+                <li key={s.title} className="flex gap-4">
+                  <span className="grid h-8 w-8 flex-none place-items-center rounded-full border border-white/15 text-[13px] text-[#ffbc05]">{i + 1}</span>
+                  <div>
+                    <p className="text-[17px] font-medium">{s.title}</p>
+                    <p className="mt-1 text-[14.5px] leading-relaxed text-white/60">{s.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <Link href={`${KIT}/docs`} target="_blank" rel="noopener" className="mt-10 inline-flex items-center gap-2 rounded-full bg-[#ffbc05] px-5 py-2.5 text-[14.5px] font-medium text-black transition-opacity hover:opacity-90">
+              Read the quick start →
+            </Link>
+          </Reveal>
+          <Reveal delay={0.1} className="min-w-0">
+            <CodeTabs />
+          </Reveal>
+        </div>
       </section>
 
       {/* Developers */}
-      <section id="developers" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 md:py-32">
+      <section id="developers" className="mx-auto max-w-[1320px] scroll-mt-24 px-5 py-24 md:py-32">
         <Pillars />
       </section>
 
       {/* Close */}
-      <section className="bg-bg-2">
-        <div className="seam" aria-hidden="true" />
-        <Reveal className="mx-auto max-w-3xl px-5 py-20 text-center md:py-28">
-          <h2 className="h-display text-[38px] md:text-[54px]">
-            Start building in minutes
-            <br />
-            <span className="soft">or get the wallet today</span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-lg text-[16px] leading-relaxed text-muted">
-            Connect Kit is free up to 499 monthly active wallets. Gas sponsorship and Decane RPC join the same account as they
-            ship.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href={KIT} target="_blank" rel="noopener" className="rounded-full bg-ink px-5 py-2.5 text-[14.5px] text-bg transition-opacity hover:opacity-85">
-              Start building
-            </Link>
-            <Link
-              href={STORE}
-              target="_blank"
-              rel="noopener"
-              className="rounded-full border border-ink/80 px-5 py-2.5 text-[14.5px] text-ink transition-colors hover:bg-ink hover:text-bg"
-            >
-              Get the wallet
-            </Link>
+      <section className="mx-auto max-w-[1320px] px-5 pb-24">
+        <Reveal>
+          <div className="relative overflow-hidden rounded-[32px] bg-gold px-7 py-14 text-black md:px-14 md:py-20">
+            <div className="pointer-events-none absolute -right-20 -top-28 h-[420px] w-[420px] rounded-full bg-white/45 blur-3xl" aria-hidden="true" />
+            <Image src={Peg} alt="" aria-hidden="true" className="absolute bottom-0 right-6 hidden w-56 md:block lg:right-14 lg:w-64" />
+            <div className="relative max-w-xl">
+              <h2 className="text-[36px] font-semibold leading-[1.02] tracking-[-0.035em] md:text-[54px]">Pick where you start</h2>
+              <p className="mt-5 text-[17px] leading-relaxed text-black/70">
+                Build wallets, gas and RPC into your app, or get the Decane Wallet for yourself. Connect Kit is free up to 499
+                monthly active wallets.
+              </p>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link href={KIT} target="_blank" rel="noopener" className="rounded-full bg-black px-6 py-3 text-[15px] font-medium text-white transition-colors hover:bg-black/80">
+                  Start building
+                </Link>
+                <Link href={STORE} target="_blank" rel="noopener" className="rounded-full border border-black/25 px-6 py-3 text-[15px] font-medium text-black transition-colors hover:border-black">
+                  Get the wallet
+                </Link>
+              </div>
+              <ul className="mt-10 grid max-w-md grid-cols-2 gap-x-6 gap-y-2 text-[14px] text-black/75">
+                {PRODUCTS.map((p) => (
+                  <li key={p.id}>
+                    <Link href={p.cta.href} target="_blank" rel="noopener" className="underline decoration-black/25 underline-offset-4 hover:decoration-black">
+                      {p.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </Reveal>
-        <div className="seam" aria-hidden="true" />
       </section>
 
       <Footer />

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import WalletUI from '@/images/wallet-ui.png';
 import Peg from '@/images/decane-peg.png';
-import KitModal from './KitModal';
+import { KitWallet } from './KitModal';
 
 // One product surface per product, all in the same frame so the four read as
 // equals: the wallet, a Connect Kit sign-in, a sponsored payment and RPC usage.
@@ -47,7 +47,7 @@ export function WalletVisual() {
 }
 
 export function KitVisual() {
-  return <KitModal />;
+  return <KitWallet />;
 }
 
 export function GasVisual() {

@@ -3,13 +3,15 @@ import Reveal from './Reveal';
 import { PRODUCTS } from './products';
 import { Arrow, isExternal } from './bits';
 
+const TINTS = ['tint-a', 'tint-b', 'tint-c', 'tint-d'];
+
 /** The four products as four equal cards, each with its own product surface. */
 export default function Bento() {
   return (
     <div id="products" className="grid scroll-mt-24 grid-cols-1 gap-4 md:grid-cols-2">
       {PRODUCTS.map((p, i) => (
         <Reveal key={p.id} delay={(i % 2) * 0.08} className="h-full">
-          <article id={p.id} className="panel-soft flex h-full scroll-mt-24 flex-col overflow-hidden rounded-2xl">
+          <article id={p.id} className={`${TINTS[i]} flex h-full scroll-mt-24 flex-col overflow-hidden rounded-3xl border border-line`}>
             <div className="p-7 pb-0 md:p-8 md:pb-0">
               <div className="flex items-center gap-2 text-[13px] text-faint">
                 <span>{p.name}</span>
@@ -20,7 +22,7 @@ export default function Bento() {
               <h3 className="mt-4 text-[24px] font-medium leading-tight tracking-[-0.02em] text-ink md:text-[26px]">{p.title}</h3>
               <p className="mt-2 max-w-md text-[15px] leading-relaxed text-muted">{p.line}</p>
             </div>
-            <div className="relative flex h-[400px] items-center justify-center overflow-hidden px-5">
+            <div className="relative flex h-[380px] items-center justify-center overflow-hidden px-5">
               <p.Visual />
             </div>
             <div className="mt-auto flex items-center justify-between border-t border-line px-7 py-4 md:px-8">

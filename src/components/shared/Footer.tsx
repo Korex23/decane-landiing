@@ -35,7 +35,7 @@ const COLUMNS = [
 const Footer = () => {
   return (
     <footer className="px-5 pb-10 pt-16">
-      <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-[repeat(3,minmax(0,180px))_1fr]">
+      <div className="mx-auto grid max-w-[1320px] gap-12 md:grid-cols-[repeat(3,minmax(0,180px))_1fr]">
         {COLUMNS.map((c) => (
           <div key={c.title}>
             <p className="text-[13.5px] text-ink">{c.title}</p>

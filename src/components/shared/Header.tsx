@@ -49,7 +49,7 @@ const Header = () => {
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 ${scrolled || open ? 'border-line bg-bg/85 backdrop-blur-xl' : 'border-transparent bg-transparent'}`}>
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+      <div className="mx-auto flex h-16 max-w-[1320px] items-center justify-between px-5">
         <Link href="/" className="flex items-center gap-2">
           <Image src={logo} alt="" width={26} height={26} className="h-6 w-6" />
           <span className="font-viga text-[22px] text-ink">Decane</span>
@@ -119,7 +119,7 @@ const Header = () => {
       </div>
 
       <div className={`overflow-hidden border-line transition-all duration-300 lg:hidden ${open ? 'max-h-[640px] border-t' : 'max-h-0'}`}>
-        <ul className="mx-auto max-w-6xl px-3 py-3">
+        <ul className="mx-auto max-w-[1320px] px-3 py-3">
           {PRODUCTS.map((p) => (
             <li key={p.id}>
               <Link href={`#${p.id}`} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-xl px-3 py-3 text-[16px] text-ink hover:bg-tint">

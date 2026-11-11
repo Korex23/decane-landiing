@@ -151,3 +151,19 @@ body {
     scroll-behavior: auto;
   }
 }
+
+/* One tint per product card, so the four read apart at a glance. */
+.tint-a { background: radial-gradient(90% 80% at 80% 0%, #ffe39a 0%, #fbf1d6 45%, #faf6ec 100%); }
+.tint-b { background: radial-gradient(90% 80% at 20% 0%, #f6dcc4 0%, #f8eee2 45%, #faf7f1 100%); }
+.tint-c { background: radial-gradient(90% 80% at 80% 0%, #f9d2a9 0%, #fbe9d8 45%, #fbf6ef 100%); }
+.tint-d { background: radial-gradient(90% 80% at 20% 0%, #e6e2c8 0%, #f1efe2 45%, #f8f7f1 100%); }
+:root[data-theme='dark'] .tint-a { background: radial-gradient(90% 80% at 80% 0%, #4a3606 0%, #1d180d 55%, #15130f 100%); }
+:root[data-theme='dark'] .tint-b { background: radial-gradient(90% 80% at 20% 0%, #3f2a19 0%, #1c160f 55%, #15130f 100%); }
+:root[data-theme='dark'] .tint-c { background: radial-gradient(90% 80% at 80% 0%, #4a2b12 0%, #1e150d 55%, #15130f 100%); }
+:root[data-theme='dark'] .tint-d { background: radial-gradient(90% 80% at 20% 0%, #33321f 0%, #18170f 55%, #15130f 100%); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .tint-a { background: radial-gradient(90% 80% at 80% 0%, #4a3606 0%, #1d180d 55%, #15130f 100%); }
+  :root:not([data-theme='light']) .tint-b { background: radial-gradient(90% 80% at 20% 0%, #3f2a19 0%, #1c160f 55%, #15130f 100%); }
+  :root:not([data-theme='light']) .tint-c { background: radial-gradient(90% 80% at 80% 0%, #4a2b12 0%, #1e150d 55%, #15130f 100%); }
+  :root:not([data-theme='light']) .tint-d { background: radial-gradient(90% 80% at 20% 0%, #33321f 0%, #18170f 55%, #15130f 100%); }
+}

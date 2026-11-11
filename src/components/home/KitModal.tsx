@@ -83,9 +83,62 @@ const Close = () => (
   </svg>
 );
 
-export default function KitModal({ id = 'kit' }: { id?: string }) {
+const CopyIcon = () => (
+  <svg width={15} height={15} viewBox="0 0 24 24" {...line} aria-hidden="true" style={{ flexShrink: 0 }}>
+    <rect x="8.5" y="8.5" width="12" height="12" rx="2.5" />
+    <path d="M15.5 8.5V6A2.5 2.5 0 0 0 13 3.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5" />
+  </svg>
+);
+
+/** The same window once signed in: "Your wallet", as SocialWalletModal draws it. */
+export function KitWallet({ id = 'kitw', className = 'origin-center scale-[0.78] sm:scale-[0.82]' }: { id?: string; className?: string }) {
+  const rows = [
+    ['Ethereum and EVM', '0x8f3a91c2…4b7e21', '0.042 ETH'],
+    ['Solana', '7xKq2mPd…c9Hn4T', '1.25 SOL'],
+  ];
   return (
-    <div className="dk origin-center scale-[0.78] sm:scale-[0.82]" role="img" aria-label="The Connect Kit sign-in window: log in or sign up with Google, email or X, or continue with a wallet">
+    <div className={`dk ${className}`} role="img" aria-label="The Connect Kit wallet window after sign-in: an EVM and a Solana address with balances">
+      <div className="dcm-card" aria-hidden="true">
+        <span className="dcm-icon-btn">
+          <Close />
+        </span>
+        <div className="dcm-body">
+          <DecaneMark id={`dkm-${id}`} />
+          <h2 className="dcm-title">Your wallet</h2>
+          <span className="dcm-status">
+            <i /> Unlocked, expires in 7h 58m
+          </span>
+          <div className="dcm-addresses">
+            {rows.map(([label, addr, bal]) => (
+              <div key={label} className="dcm-address">
+                <div className="dcm-address-main">
+                  <span>{label}</span>
+                  <code>{addr}</code>
+                </div>
+                <span className="dcm-balance">{bal}</span>
+                <span className="dcm-copy">
+                  <CopyIcon />
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="dcm-actions">
+            <span className="dcm-ghost">Sign out</span>
+          </div>
+          <div className="dcm-protected">
+            <span>Protected by</span>
+            <DecaneMark size={14} muted id={`dkp-${id}`} />
+            <span className="dcm-wordmark">decane</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function KitModal({ id = 'kit', className = 'origin-center scale-[0.78] sm:scale-[0.82]' }: { id?: string; className?: string }) {
+  return (
+    <div className={`dk ${className}`} role="img" aria-label="The Connect Kit sign-in window: log in or sign up with Google, email or X, or continue with a wallet">
       <div className="dcm-card" aria-hidden="true">
         <span className="dcm-icon-btn">
           <Close />

@@ -61,3 +61,18 @@
 .dk .dcm-protected { width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;
   margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--dc-border); font-size: 12.5px; color: var(--dc-text-muted); }
 .dk .dcm-wordmark { font-weight: 800; font-size: 12px; letter-spacing: -0.03em; color: var(--dc-text-muted); line-height: 1; }
+
+/* "Your wallet" view (SocialWalletModal, signed in) */
+.dk .dcm-status { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 500; margin-top: -8px; color: #12b76a; }
+.dk .dcm-status i { width: 7px; height: 7px; border-radius: 50%; display: block; background: #12b76a; }
+.dk .dcm-addresses { width: 100%; border: 1px solid var(--dc-border); border-radius: 16px; overflow: hidden; text-align: left; }
+.dk .dcm-address { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--dc-surface); }
+.dk .dcm-address + .dcm-address { border-top: 1px solid var(--dc-border); }
+.dk .dcm-address-main { flex: 1; min-width: 0; display: grid; gap: 3px; }
+.dk .dcm-address-main span { font-size: 13px; color: var(--dc-text-secondary); }
+.dk .dcm-address-main code { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: var(--dc-text); }
+.dk .dcm-balance { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 13px; color: var(--dc-text); white-space: nowrap; }
+.dk .dcm-copy { width: 30px; height: 30px; display: grid; place-items: center; color: var(--dc-text-muted); }
+.dk .dcm-actions { width: 100%; display: flex; gap: 8px; }
+.dk .dcm-ghost { flex: 1; height: 44px; display: grid; place-items: center; border-radius: 12px; border: 1px solid var(--dc-border);
+  color: var(--dc-text); font-weight: 500; font-size: 14px; }
