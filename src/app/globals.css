@@ -1,32 +1,112 @@
 @import 'tailwindcss';
 
+/* Theme tokens. Light is the default; dark follows the system until the
+   visitor picks one with the toggle (html[data-theme]). */
 :root {
-  --background: #000;
-  --navlinks_bg: #FFFFFF3D;
-  --navbar_bg: transparent;
+  --bg: #f7f3ea;
+  --bg-2: #efe8d8;
+  --card: #ffffff;
+  --card-2: #fbf8f1;
+  --ink: #17140d;
+  --muted: #5f594b;
+  --faint: #948d7c;
+  --line: rgba(23, 20, 13, 0.1);
+  --gold: #ffbc05;
+  --gold-ink: #8f6400;
+  --gold-soft: rgba(255, 188, 5, 0.16);
+  --shadow: 0 24px 60px -30px rgba(60, 45, 10, 0.35);
+  --dot: rgba(23, 20, 13, 0.09);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0b0a07;
+    --bg-2: #13110c;
+    --card: #15130e;
+    --card-2: #1b1913;
+    --ink: #f5f1e7;
+    --muted: rgba(245, 241, 231, 0.66);
+    --faint: rgba(245, 241, 231, 0.42);
+    --line: rgba(255, 255, 255, 0.1);
+    --gold-ink: #ffbc05;
+    --gold-soft: rgba(255, 188, 5, 0.13);
+    --shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+    --dot: rgba(255, 255, 255, 0.07);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #0b0a07;
+  --bg-2: #13110c;
+  --card: #15130e;
+  --card-2: #1b1913;
+  --ink: #f5f1e7;
+  --muted: rgba(245, 241, 231, 0.66);
+  --faint: rgba(245, 241, 231, 0.42);
+  --line: rgba(255, 255, 255, 0.1);
+  --gold-ink: #ffbc05;
+  --gold-soft: rgba(255, 188, 5, 0.13);
+  --shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
+  --dot: rgba(255, 255, 255, 0.07);
+  color-scheme: dark;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-navlinks-bg: var(--navlinks_bg);
-  --color-navbar-bg: var(--navbar_bg);
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-gold-soft: var(--gold-soft);
   --color-decane-yellow: #ffd700;
 
   --font-viga: var(--font-viga);
-  --font-russo-one: var(--font-russo-one);
-  --font-rouge-script: var(--font-rouge-script);
-  --font-urbanist: var(--font-urbanist);
-  --font-tajawal: var(--font-tajawal);
-  --font-tac-one: var(--font-tac-one);
-  --font-figtree: var(--font-figtree);
   --font-plusJakartaSans: var(--font-plus-jakarta-sans);
 }
 
-body {
-  background: var(--color-background);
-  color: black;
+html {
+  scroll-behavior: smooth;
 }
 
-.wrapper {
-  @apply max-w-[1440px] w-[90%] mx-auto;
+body {
+  background: var(--bg);
+  color: var(--ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dots {
+  background-image: radial-gradient(var(--dot) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
