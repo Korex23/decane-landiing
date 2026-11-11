@@ -46,7 +46,7 @@ export default function MascotBuddy() {
   const ref = useRef<HTMLButtonElement>(null);
   const [blink, setBlink] = useState(false);
   const [air, setAir] = useState(false);
-  const [shown, setShown] = useState(false);
+  const [onLeft, setOnLeft] = useState(false);
 
   // Body: position and the squash-and-stretch of each hop.
   const y = useMotionValue(0);
@@ -98,6 +98,7 @@ export default function MascotBuddy() {
       if (!alive()) return;
       rot.set(0);
       setAir(false);
+      setOnLeft(index % 2 === 1);
       // land: squash, then wobble back to shape
       await Promise.all([
         animate(sy, 0.7, { duration: 0.07, ease: 'easeOut' }),
@@ -112,17 +113,11 @@ export default function MascotBuddy() {
 
   // Watch which section you are in; hop when it changes.
   useEffect(() => {
-    if (still) {
-      const on = () => setShown(window.scrollY > 240);
-      on();
-      window.addEventListener('scroll', on, { passive: true });
-      return () => window.removeEventListener('scroll', on);
-    }
+    if (still) return;
     let sections = findSections();
     let frame = 0;
     const check = () => {
       frame = 0;
-      setShown(window.scrollY > 240);
       const line = window.innerHeight * 0.45;
       let i = 0;
       sections.forEach((s, k) => {
@@ -134,6 +129,7 @@ export default function MascotBuddy() {
         const p = perch(i, n);
         x.set(p.x);
         y.set(p.y);
+        setOnLeft(i % 2 === 1);
       } else if (i !== hop.current.index || n !== hop.current.n) {
         hop.current.index = i;
         hop.current.n = n;
@@ -229,8 +225,7 @@ export default function MascotBuddy() {
         type="button"
         onClick={toTop}
         aria-label="Back to top"
-        className="fixed bottom-5 right-5 z-40 h-12 w-12 transition-opacity"
-        style={{ opacity: shown ? 1 : 0, pointerEvents: shown ? 'auto' : 'none' }}
+        className="fixed bottom-5 right-5 z-40 h-12 w-12"
       >
         {face}
       </button>
@@ -244,10 +239,10 @@ export default function MascotBuddy() {
       onClick={toTop}
       aria-label="Back to top"
       className="group fixed left-0 top-0 z-40 h-14 w-14 cursor-pointer"
-      style={{ y, x, pointerEvents: shown ? 'auto' : 'none' }}
-      initial={false}
-      animate={{ opacity: shown ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
+      style={{ y, x }}
+      initial={{ opacity: 0, scale: 0.6 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 16, delay: 0.6 }}
     >
       {/* shadow on the perch: shrinks while it is in the air */}
       <motion.span
@@ -272,7 +267,11 @@ export default function MascotBuddy() {
           {face}
         </motion.span>
       </motion.span>
-      <span className="pointer-events-none absolute right-full top-1/2 mr-2 -translate-y-1/2 whitespace-nowrap rounded-full bg-ink px-2.5 py-1 text-[12px] text-bg opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+      <span
+        className={`pointer-events-none absolute top-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-ink px-2.5 py-1 text-[12px] text-bg opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100 ${
+          onLeft ? 'left-full ml-2' : 'right-full mr-2'
+        }`}
+      >
         Back to top
       </span>
     </motion.button>
