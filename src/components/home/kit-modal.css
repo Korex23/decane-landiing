@@ -1,0 +1,63 @@
+/* The Connect Kit sign-in modal, copied from decane-connect-kit's
+   sdk-web/src/ui (MODAL_CSS and the light/dark tokens in styles.ts) so the
+   landing shows the real UI. Scoped under .dk so it cannot leak. */
+
+.dk {
+  --dc-bg: #ffffff;
+  --dc-surface: #f9f9f7;
+  --dc-surface-hover: #f0efeb;
+  --dc-border: #dddcda;
+  --dc-text: #0d0d0b;
+  --dc-text-secondary: #5c5a57;
+  --dc-text-muted: #8a8884;
+  --dc-accent: #f5c800;
+  --dc-accent-ink: #7a5f00;
+  font-family: 'Plus Jakarta Sans', var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+:root[data-theme='dark'] .dk {
+  --dc-bg: #0d0d0b;
+  --dc-surface: #1a1917;
+  --dc-surface-hover: #2a2927;
+  --dc-border: #3d3c39;
+  --dc-text: #f9f9f7;
+  --dc-text-secondary: #bdbbb8;
+  --dc-text-muted: #8a8884;
+  --dc-accent-ink: #f5c800;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .dk {
+    --dc-bg: #0d0d0b;
+    --dc-surface: #1a1917;
+    --dc-surface-hover: #2a2927;
+    --dc-border: #3d3c39;
+    --dc-text: #f9f9f7;
+    --dc-text-secondary: #bdbbb8;
+    --dc-text-muted: #8a8884;
+    --dc-accent-ink: #f5c800;
+  }
+}
+
+.dk .dcm-card { position: relative; width: 380px; background: var(--dc-bg); color: var(--dc-text);
+  border: 1px solid var(--dc-border); border-radius: 24px;
+  box-shadow: 0 24px 64px -12px rgba(0,0,0,.35), 0 2px 8px rgba(0,0,0,.08); box-sizing: border-box; }
+.dk .dcm-card *, .dk .dcm-card *::before, .dk .dcm-card *::after { box-sizing: border-box; }
+.dk .dcm-icon-btn { position: absolute; top: 14px; right: 14px; width: 32px; height: 32px; border-radius: 10px;
+  color: var(--dc-text-muted); display: grid; place-items: center; }
+.dk .dcm-body { padding: 32px 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.dk .dcm-title { margin: 4px 0 0; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; color: var(--dc-text); }
+.dk .dcm-methods { width: 100%; display: grid; gap: 8px; margin-top: 4px; }
+.dk .dcm-method { width: 100%; height: 48px; display: flex; align-items: center; gap: 12px; padding: 0 14px;
+  border-radius: 14px; border: 1px solid var(--dc-border); background: var(--dc-surface); color: var(--dc-text);
+  font-weight: 500; font-size: 14.5px; line-height: 1; text-align: left; }
+.dk .dcm-method > svg { color: var(--dc-text-secondary); }
+.dk .dcm-method-input { padding-right: 6px; }
+.dk .dcm-placeholder { flex: 1; min-width: 0; color: var(--dc-text-muted); font-size: 14.5px; }
+.dk .dcm-submit { height: 34px; padding: 0 12px; display: grid; place-items: center; border-radius: 10px;
+  color: var(--dc-text-muted); font-weight: 600; font-size: 13.5px; }
+.dk .dcm-or { width: 100%; display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--dc-text-muted); }
+.dk .dcm-or::before, .dk .dcm-or::after { content: ''; flex: 1; height: 1px; background: var(--dc-border); }
+.dk .dcm-trail { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; color: var(--dc-text-muted); }
+.dk .dcm-protected { width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px;
+  margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--dc-border); font-size: 12.5px; color: var(--dc-text-muted); }
+.dk .dcm-wordmark { font-weight: 800; font-size: 12px; letter-spacing: -0.03em; color: var(--dc-text-muted); line-height: 1; }

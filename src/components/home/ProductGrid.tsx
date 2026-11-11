@@ -29,7 +29,7 @@ export default function Products() {
               <p className="mt-3 font-plusJakartaSans text-[15.5px] leading-relaxed text-muted">{p.body}</p>
             </div>
 
-            <div className="dots mx-4 mt-7 flex h-[380px] items-center justify-center overflow-hidden rounded-[24px] bg-bg-2/70 px-5 md:mx-5">
+            <div className="dots mx-4 mt-7 flex h-[400px] items-center justify-center overflow-hidden rounded-[24px] bg-bg-2/70 px-5 md:mx-5">
               <p.Visual />
             </div>
 

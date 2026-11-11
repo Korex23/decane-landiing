@@ -37,11 +37,7 @@ export default function Home() {
         />
         <div className="relative mx-auto grid max-w-6xl grid-cols-1 items-center gap-14 lg:grid-cols-[1fr_1.02fr] lg:gap-12">
           <Reveal className="min-w-0">
-            <span className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-3.5 py-1.5 font-plusJakartaSans text-[13px] font-medium text-muted">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-              One company, four products
-            </span>
-            <h1 className="mt-7 font-plusJakartaSans text-[46px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink sm:text-[60px] lg:text-[72px]">
+            <h1 className="font-plusJakartaSans text-[46px] font-semibold leading-[0.98] tracking-[-0.04em] text-ink sm:text-[60px] lg:text-[72px]">
               The wallet for people.{' '}
               <span className="relative whitespace-nowrap">
                 <span className="relative z-10">The rails</span>

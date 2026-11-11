@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import WalletUI from '@/images/wallet-ui.png';
 import Peg from '@/images/decane-peg.png';
+import KitModal from './KitModal';
 
 // One product surface per product, all in the same frame so the four read as
 // equals: the wallet, a Connect Kit sign-in, a sponsored payment and RPC usage.
@@ -46,34 +47,7 @@ export function WalletVisual() {
 }
 
 export function KitVisual() {
-  return (
-    <div className="relative mx-auto flex w-full max-w-[340px] flex-col items-center">
-      <Win
-        title={
-          <>
-            <span className="grid h-6 w-6 place-items-center rounded-md bg-gold text-[11px] font-bold text-black">N</span>
-            Sign in to Northgate
-          </>
-        }
-      >
-        {[
-          ['G', 'Continue with Google'],
-          ['@', 'Continue with email'],
-          ['#', 'Continue with phone'],
-          ['X', 'Continue with X'],
-        ].map(([i, t]) => (
-          <div key={t} className="flex items-center gap-3 rounded-xl border border-line px-3 py-2.5 text-ink">
-            <span className="grid h-6 w-6 place-items-center rounded-md bg-bg-2 text-[12px] font-semibold">{i}</span>
-            {t}
-          </div>
-        ))}
-        <p className="pt-1 text-center text-[11px] text-faint">Secured by Decane · no seed phrase</p>
-      </Win>
-      <Chip className="-mt-4 animate-[float_6s_ease-in-out_infinite]">
-        <Ok /> Wallet ready on EVM, Solana and Tron
-      </Chip>
-    </div>
-  );
+  return <KitModal />;
 }
 
 export function GasVisual() {
