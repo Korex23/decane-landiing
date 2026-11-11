@@ -3,12 +3,11 @@ import Link from 'next/link';
 import { Header } from '@/components';
 import Footer from '@/components/shared/Footer';
 import Reveal from '@/components/home/Reveal';
-import Bento from '@/components/home/Bento';
+import ProductRail from '@/components/home/ProductRail';
 import Pillars from '@/components/home/Pillars';
 import HeroScene from '@/components/home/HeroScene';
 import CodeTabs from '@/components/home/CodeTabs';
 import { PRODUCTS } from '@/components/home/products';
-import { Glyph } from '@/components/home/bits';
 import { KIT, STORE } from '@/components/home/links';
 import Peg from '@/images/decane-peg.png';
 
@@ -90,31 +89,8 @@ export default function Home() {
 
       <div className="seam" aria-hidden="true" />
 
-      {/* Products */}
-      <section className="mx-auto max-w-[1320px] px-5 pb-24 pt-16 md:pb-32 md:pt-20">
-        <Reveal className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
-          <h2 className="h-display max-w-3xl text-[34px] md:text-[46px]">
-            Four products, one account
-            <br />
-            <span className="soft">for apps and their users</span>
-          </h2>
-          <ul className="flex flex-wrap gap-2">
-            {PRODUCTS.map((p) => (
-              <li key={p.id}>
-                <Link href={`#${p.id}`} className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-[13px] text-muted transition-colors hover:border-ink/30 hover:text-ink">
-                  <span className="text-gold-ink">
-                    <Glyph d={p.icon} size={14} />
-                  </span>
-                  {p.short}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-        <div className="mt-12">
-          <Bento />
-        </div>
-      </section>
+      {/* Products: pinned horizontal scroll */}
+      <ProductRail />
 
       {/* Code */}
       <section className="relative overflow-hidden bg-[#0d0c09] text-[#f5f2ea]">
