@@ -33,8 +33,8 @@ export default function Home() {
       <Header />
 
       {/* Hero: copy left, the products on a warm panel right */}
-      <header className="mx-auto grid max-w-[1400px] items-center gap-12 px-5 pt-28 md:pt-32 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:pl-[max(20px,calc((100vw-1152px)/2))] lg:pr-0">
-        <Reveal className="min-w-0 lg:pr-6">
+      <header className="mx-auto grid max-w-6xl items-center gap-12 px-5 pt-28 md:pt-32 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12">
+        <Reveal className="min-w-0">
           <h1 className="h-display text-[44px] sm:text-[56px] lg:text-[62px]">
             Put crypto in everyone&apos;s hands
             <br />
@@ -60,17 +60,17 @@ export default function Home() {
         </Reveal>
 
         <Reveal delay={0.12} className="min-w-0">
-          <div className="panel-warm relative h-[460px] overflow-hidden rounded-2xl sm:h-[560px] lg:rounded-r-none">
+          <div className="panel-warm relative h-[460px] overflow-hidden rounded-2xl sm:h-[540px]">
             <Image
               src={WalletUI}
               alt="The Decane Wallet home screen"
               priority
-              className="absolute -left-[8%] bottom-[-6%] w-[78%] max-w-[560px] sm:-left-[4%] sm:w-[66%]"
+              className="absolute bottom-[2%] left-[-8%] w-[78%] max-w-[520px] sm:left-[-5%] sm:w-[68%]"
             />
-            <div className="absolute right-[-12%] top-1/2 -translate-y-1/2 sm:right-[4%]">
+            <div className="absolute right-[-14%] top-[54%] -translate-y-1/2 sm:right-[-3%]">
               <KitModal id="hero" />
             </div>
-            <Chip className="absolute left-[8%] top-[9%] animate-[float_6s_ease-in-out_infinite]">
+            <Chip className="absolute left-[6%] top-[7%] animate-[float_6s_ease-in-out_infinite]">
               <Ok /> Sent 25 USDC · gas paid by Northgate
             </Chip>
           </div>
