@@ -29,15 +29,7 @@ export default function Home() {
       {/* Hero */}
       <header className="mx-auto grid max-w-[1320px] items-center gap-12 px-5 pt-28 md:pt-32 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
         <Reveal className="min-w-0">
-          <Link
-            href="#gas"
-            className="group inline-flex items-center gap-2 rounded-full border border-line bg-card py-1 pl-1 pr-3 text-[13px] text-muted transition-colors hover:border-ink/30"
-          >
-            <span className="rounded-full bg-gold px-2 py-0.5 text-[11.5px] font-semibold text-black">New</span>
-            Gas sponsorship and RPC are coming
-            <span className="transition-transform group-hover:translate-x-0.5">→</span>
-          </Link>
-          <h1 className="h-display mt-6 text-[44px] sm:text-[56px] lg:text-[52px] xl:text-[60px]">
+          <h1 className="h-display text-[44px] sm:text-[56px] lg:text-[52px] xl:text-[60px]">
             <span className="block text-balance lg:whitespace-nowrap">Wallets for everyone.</span>
             <span className="soft block text-balance lg:whitespace-nowrap">Rails for every app.</span>
           </h1>
