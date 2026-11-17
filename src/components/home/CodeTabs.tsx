@@ -72,7 +72,7 @@ const user = await decane.getUser(token);`,
     code: `import { createPublicClient, http } from "viem";
 import { base } from "viem/chains";
 
-// Coming soon: one URL, from your Decane project
+// One URL, from your Decane project's API keys page
 const client = createPublicClient({
   chain: base,
   transport: http("https://backend.decane.app/rpc/v1/8453/dck_rpc_…"),

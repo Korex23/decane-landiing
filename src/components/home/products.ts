@@ -4,8 +4,8 @@ import { STORE, KIT, DISCORD } from './links';
 
 // The four Decane products, in one list so every place that shows them (the
 // hero switcher, the product grid, the nav and the footer) gives each the same
-// weight. Gas sponsorship and RPC are not released yet and say so, as
-// kit.decane.app does.
+// weight. All four are live; gas sponsorship leads with what developers earn
+// on it, as kit.decane.app/gas-sponsorship does.
 
 export type Product = {
   id: string;
@@ -57,13 +57,12 @@ export const PRODUCTS: Product[] = [
     name: 'Gas sponsorship',
     short: 'Gas',
     audience: 'For builders',
-    line: 'Your users send without ever holding gas.',
-    title: 'Nobody needs ETH to press send',
-    body: 'Cover the network fee for your users, or let them pay it in USDC. They confirm and it lands, from the same wallet and the same address.',
-    points: ['Your project pays, or the user pays in a token', 'Caps per user and per day', 'Only the contracts you allow', 'Contracts pinned in the SDK'],
+    line: 'Users send without gas. You earn on every send.',
+    title: 'Sponsor gas, and earn on it',
+    body: 'Your users never need ETH: they pay the network fee in USDC with your markup on top, and that markup is paid to your wallet on-chain with every send. Or cover the fee yourself from a prepaid gas tank.',
+    points: ['Your markup on every token-paid send, up to 50%', 'Paid to your wallet on-chain, each transaction', 'Prepaid gas tank, topped up in USDC', 'Caps per send, per user and per day'],
     cta: { label: 'Read more', href: `${KIT}/gas-sponsorship` },
-    more: { label: 'Ask for early access', href: 'mailto:info@decane.app' },
-    soon: true,
+    more: { label: 'Turn it on in the dashboard', href: 'https://dashboard.decane.app' },
     icon: 'M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z',
     Visual: GasVisual,
   },
@@ -77,8 +76,7 @@ export const PRODUCTS: Product[] = [
     body: 'An endpoint that works anywhere an Ethereum RPC does: viem, ethers, wagmi, Hardhat and Foundry. Keys, limits and usage live in the same dashboard as your wallets.',
     points: ['Base first, more EVM chains to follow', 'Free plan at 20 requests a second', 'Usage per day and per method', 'Keys shown once and stored hashed'],
     cta: { label: 'Read more', href: `${KIT}/rpc` },
-    more: { label: 'Ask for early access', href: 'mailto:info@decane.app' },
-    soon: true,
+    more: { label: 'Get an RPC key', href: 'https://dashboard.decane.app' },
     icon: 'M4 5h16v5H4zM4 14h16v5H4zM8 7.5h.01M8 16.5h.01',
     Visual: RpcVisual,
   },

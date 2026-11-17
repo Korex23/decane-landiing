@@ -51,12 +51,16 @@ export function GasVisual() {
         <div className="flex items-start justify-between">
           <span className="text-faint">Network fee</span>
           <span className="text-right">
-            <span className="rounded-md bg-emerald-500/15 px-2 py-0.5 font-semibold text-emerald-600">Free</span>
-            <span className="mt-1 block text-[11px] text-faint">Paid by Northgate</span>
+            <span className="font-semibold text-ink">0.12 USDC</span>
+            <span className="mt-1 block text-[11px] text-faint">No ETH needed</span>
           </span>
         </div>
         <div className="rounded-xl bg-gold py-2.5 text-center font-semibold text-black">Confirm</div>
       </Win>
+      <div className="mt-3 flex items-center gap-2 rounded-full border border-line bg-card px-3.5 py-1.5 text-[12.5px] text-ink shadow-sm">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+        Northgate earned <b className="font-semibold">0.02 USDC</b> on this send
+      </div>
     </div>
   );
 }
