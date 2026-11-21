@@ -2,8 +2,8 @@ import Image from 'next/image';
 import WalletUI from '@/images/wallet-ui.png';
 import { KitWallet } from './KitModal';
 
-// One product surface per product, all in the same frame so the four read as
-// equals: the wallet, a Connect Kit sign-in, a sponsored payment and RPC usage.
+// One product surface per product, all in the same frame so they read as
+// equals: the wallet, a Connect Kit sign-in, a checkout, a sponsored payment and RPC usage.
 // Colours come from the theme tokens, so each works in light and dark.
 
 const Win = ({ title, right, children }: { title: React.ReactNode; right?: React.ReactNode; children: React.ReactNode }) => (
@@ -60,6 +60,52 @@ export function GasVisual() {
       <div className="mt-3 flex items-center gap-2 rounded-full border border-line bg-card px-3.5 py-1.5 text-[12.5px] text-ink shadow-sm">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
         Northgate earned <b className="font-semibold">0.02 USDC</b> on this send
+      </div>
+    </div>
+  );
+}
+
+export function PaymentsVisual() {
+  return (
+    <div className="relative mx-auto flex w-full max-w-[340px] flex-col items-center">
+      <Win
+        title={
+          <>
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gold/20 text-[10px] font-bold text-gold-ink">N</span>
+            Pay Northgate
+          </>
+        }
+        right={<span className="rounded-full bg-gold/15 px-2 py-0.5 text-[10.5px] font-semibold text-gold-ink">9:41</span>}
+      >
+        <div className="py-1 text-center">
+          <div className="text-[34px] font-semibold tracking-tight text-ink">
+            25.00 <span className="text-[15px] font-medium text-faint">USDC</span>
+          </div>
+        </div>
+        {[
+          ['Pay with', 'SOL on Solana'],
+          ['Send exactly', '0.1384 SOL'],
+        ].map(([k, val]) => (
+          <div key={k} className="flex justify-between border-b border-line pb-2.5">
+            <span className="text-faint">{k}</span>
+            <span className="text-ink">{val}</span>
+          </div>
+        ))}
+        <div className="flex items-start justify-between">
+          <span className="text-faint">You receive</span>
+          <span className="text-right">
+            <span className="font-semibold text-ink">25.00 USDC</span>
+            <span className="mt-1 block text-[11px] text-faint">on Base, to your address</span>
+          </span>
+        </div>
+        <div className="flex items-center justify-center gap-2 rounded-xl border border-line py-2.5 text-[12.5px] text-muted">
+          <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+          Waiting for payment
+        </div>
+      </Win>
+      <div className="mt-3 flex items-center gap-2 rounded-full border border-line bg-card px-3.5 py-1.5 text-[12.5px] text-ink shadow-sm">
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+        Paid · <b className="font-semibold">25.00 USDC</b> settled to Northgate
       </div>
     </div>
   );

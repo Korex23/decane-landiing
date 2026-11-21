@@ -19,7 +19,7 @@ const TRUST = ['Non-custodial', '2-of-3 key shares', 'Attested enclave', 'EVM, S
 const STEPS = [
   { title: 'Create a project', body: 'Sign up, create a project and copy its key. Free up to 499 monthly active wallets.' },
   { title: 'Drop in the SDK', body: 'One provider on the web, one client on mobile, one line to verify tokens on your server.' },
-  { title: 'Go live', body: 'Your users sign in the way they already do and leave with a wallet. Add gas and RPC to the same project as they ship.' },
+  { title: 'Go live', body: 'Your users sign in the way they already do and leave with a wallet. Add payments, gas and RPC to the same project as they ship.' },
 ];
 
 export default function Home() {
@@ -37,7 +37,7 @@ export default function Home() {
           </h1>
           <p className="mt-6 max-w-[30rem] text-[17px] leading-relaxed text-muted md:text-[18px]">
             Decane is a self-custody wallet for people, and the infrastructure under it for builders: wallets behind any
-            sign-in, gas nobody has to hold, and node access from one URL.
+            sign-in, crypto payments settled in USDC, gas nobody has to hold, and node access from one URL.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Link href={KIT} target="_blank" rel="noopener" className="rounded-full bg-ink px-6 py-3 text-[15px] font-medium text-bg transition-opacity hover:opacity-85">

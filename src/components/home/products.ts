@@ -1,10 +1,10 @@
 import type { ReactElement } from 'react';
-import { WalletVisual, KitVisual, GasVisual, RpcVisual } from './Visuals';
+import { WalletVisual, KitVisual, PaymentsVisual, GasVisual, RpcVisual } from './Visuals';
 import { STORE, KIT, DISCORD } from './links';
 
-// The four Decane products, in one list so every place that shows them (the
-// hero switcher, the product grid, the nav and the footer) gives each the same
-// weight. All four are live; gas sponsorship leads with what developers earn
+// The Decane products, in one list so every place that shows them (the hero
+// switcher, the product grid, the nav and the footer) gives each the same
+// weight. All are live (payments in early access); gas sponsorship leads with what developers earn
 // on it, as kit.decane.app/gas-sponsorship does.
 
 export type Product = {
@@ -51,6 +51,20 @@ export const PRODUCTS: Product[] = [
     more: { label: 'Read the docs', href: `${KIT}/docs` },
     icon: 'M7 11V8a5 5 0 0 1 10 0v3M5 11h14v10H5zM12 15v2',
     Visual: KitVisual,
+  },
+  {
+    id: 'payments',
+    name: 'Payments',
+    short: 'Payments',
+    audience: 'For builders',
+    line: 'Get paid in any token. Receive USDC.',
+    title: 'Take crypto payments, settled in USDC',
+    body: 'Create a checkout from your server and send the link. Customers pay in whatever they hold, on the network they hold it on; you receive USDC at your address and a signed webhook. Customers with a Decane wallet just approve.',
+    points: ['Any token Dextopus routes, across chains', 'Settled as USDC to your own address', 'A hosted checkout page, or embed it', 'Refunds come to you, never lost'],
+    cta: { label: 'Read more', href: `${KIT}/payments` },
+    more: { label: 'Turn it on in the dashboard', href: 'https://dashboard.decane.app' },
+    icon: 'M3 7h18v10H3zM3 11h18M7 15h3',
+    Visual: PaymentsVisual,
   },
   {
     id: 'gas',

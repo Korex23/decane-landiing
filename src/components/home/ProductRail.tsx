@@ -7,10 +7,10 @@ import { PRODUCTS, type Product } from './products';
 import { Arrow, Glyph, isExternal } from './bits';
 
 // The products as a pinned horizontal scroll: the section holds the screen
-// while scrolling down slides the four cards across. Phones and reduced motion
+// while scrolling down slides the cards across. Phones and reduced motion
 // get the same cards stacked, with no pinning.
 
-const TINTS = ['tint-a', 'tint-b', 'tint-c', 'tint-d'];
+const TINTS = ['tint-a', 'tint-b', 'tint-c', 'tint-d', 'tint-e'];
 
 // Left edge of the 1320px column, so the first card lines up with the heading.
 const EDGE = 'max(20px, calc((100vw - 1320px) / 2 + 20px))';
@@ -108,7 +108,7 @@ function Heading({ active, onPick }: { active: number; onPick?: (i: number) => v
   return (
     <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
       <h2 className="h-display max-w-3xl text-[34px] md:text-[44px]">
-        Four products, one account
+        Five products, one account
         <br />
         <span className="soft">for apps and their users</span>
       </h2>
